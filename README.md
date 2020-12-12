@@ -9,7 +9,7 @@ github : [BaseImageLoader](https://github.com/AlexFugui/BaseImageLoader)
 # 设计说明
 根据`BaseImageLoader`持有图片View层的`context`和`BaseImageConfig`类实现Glide原生的生命周期感知和多样化的自定义配置加载
 `BaseImageConfig`使用建造者模式,使用更灵活更方便,也可自行继承`BaseImageConfig`减少类名长度和实现自定义功能
-##主要功能
+# 主要功能
 - loadImage
 动态配置congif加载你需求的资源图片
 - loadImageAs
@@ -21,6 +21,11 @@ github : [BaseImageLoader](https://github.com/AlexFugui/BaseImageLoader)
 
 # 添加依赖
 ``implementation 'com.alex:BaseImageLoader:1.0.3'``
+
+# 使用的依赖库
+api 'com.github.bumptech.glide:glide:4.11.0'
+annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+开发者如需剔除重复依赖自行处理
 
 # 使用说明
 ## 1.添加权限
@@ -262,5 +267,7 @@ api与代码设置相同
 | clearDiskCache() | Boolean | true为清除储存中缓存,仅在BaseImageLoader.clear()中生效 |
 | show() |   无 | BaseImageConfig使用建造者模式,用于new BaseImageConfig对象 |
 
-![](https://images.xiaozhuanlan.com/photo/2020/6ac26499784a44871d0f8d988b53a6cc.png)
+# ![附 Glide v4 中文文档](https://muyangmin.github.io/glide-docs-cn/)
+
+![ ](https://images.xiaozhuanlan.com/photo/2020/6ac26499784a44871d0f8d988b53a6cc.png)
 
