@@ -1,7 +1,9 @@
 # 说明
 ![话不多说先放图](https://images.xiaozhuanlan.com/photo/2020/c36eb5e1aa850f01e02d2aef9a619618.jpg)
 支持加载网络图片(String格式url)/本地资源(miamap和drawable)/网络.9图片/gif加载/自定义样式(圆形/圆角/centerCrop)/dataBinding
+
 更多使用方法和示例代码请下载demo源码查看
+
 github : [BaseImageLoader](https://github.com/AlexFugui/BaseImageLoader)
 
 # 设计说明
@@ -69,9 +71,13 @@ mImageLoader.loadImage(this, ImageConfig.builder()
                 .show());
 ```
 ###**注意:**
+
 避免过度绘制和二次绘制,其中优先级
+
 isCircle(true)>setRadius()>setTopRightRadius()/setTopLeftRadius()/setBottomRightRadius/setBottomLeftRadius
+
 1.设置isCircle(true)会使通用圆角设置不生效,减少绘制次数
+
 2.设置setRadius()会使分别控制单独圆角不生效,减少绘制次数
 
 **3.**资源文件直出
