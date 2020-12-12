@@ -305,6 +305,23 @@
 
             </LinearLayout>
         </ScrollView>
+
+        <me.alex.baseimageloader.view.BaseImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:asBitmap="true"
+            app:bottomLeftRadius="40dp"
+            app:bottomRightRadius="30dp"
+            app:cacheStrategy="ALL"
+            app:errorPic="@mipmap/ic_launcher"
+            app:isCenterCrop="true"
+            app:isCircle="true"
+            app:isCrossFade="true"
+            app:placeholder="@drawable/ic_baseline_adb_24"
+            app:radius="30dp"
+            app:topLeftRadius="20dp"
+            app:topRightRadius="10dp"
+            app:url="https://xxx.xxx.com/photo/xxxxxx.png" />
     </RelativeLayout>
 
 </layout>

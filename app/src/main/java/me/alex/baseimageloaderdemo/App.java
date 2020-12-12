@@ -26,11 +26,13 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         BaseImageSetting.getInstance()
-                .setMemoryCacheSize(30)
-                .setBitmapPoolSize(50)
-                .setDiskCacheSize(80)
-                .setLogLevel(Log.ERROR)
-                .setCacheFileName("BaseImageDemo")
-                .setCacheStrategy(CacheStrategy.AUTOMATIC);
+                .setMemoryCacheSize(30)//设置内存缓存大小 单位mb
+                .setBitmapPoolSize(50)//设置bitmap池缓存大小 单位mb
+                .setDiskCacheSize(80)//设置储存储存缓存大小 单位mb
+                .setLogLevel(Log.ERROR)//设置log等级
+                .setPlaceholder(R.drawable.ic_baseline_adb_24)//设置通用占位图片,全项目生效
+                .setErrorPic(R.mipmap.ic_launcher)//设置通用加载错误图片,全项目生效
+                .setCacheFileName("BaseImageLoaderDemo")//设置储存缓存文件夹名称,api基于Glide v4
+                .setCacheStrategy(CacheStrategy.AUTOMATIC);//设置缓存策略
     }
 }

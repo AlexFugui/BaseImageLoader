@@ -66,7 +66,7 @@ public interface BaseImageLoaderStrategy<T extends BaseImageConfig, L extends On
     void loadImageAs(@NonNull Context context, @NonNull Object url, @Nullable ImageView imageView, @NonNull L listener);
 
     /**
-     * 停止加载
+     * 停止加载 或 清除缓存
      *
      * @param context {@link Context}
      * @param config  {@link BaseImageConfig}  图片加载配置信息

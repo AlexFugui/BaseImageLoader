@@ -66,8 +66,10 @@ public class BaseImageLoader implements BaseImageLoaderStrategy<BaseImageConfig,
     public void loadImage(@NonNull Context context, @NonNull BaseImageConfig config) {
         GlideRequests requests;
         requests = GlideAlex.with(context);//如果context是activity/Fragment则自动使用V层的生命周期
+        if (config.getAsBitmap()) {
+            requests.asBitmap();
+        }
         GlideRequest<Drawable> glideRequest = requests.load(config.getUrl());
-
         //缓存类型
         //如果BaseImageConfig缓存策略为默认的ALL 则使用默认缓存策略
         if (config.getCacheStrategy() == CacheStrategy.ALL) {
@@ -96,14 +98,15 @@ public class BaseImageLoader implements BaseImageLoaderStrategy<BaseImageConfig,
             }
         }
 
+
         //占位图
-        if (config.getPlaceholder() != -1) {
-            glideRequest.placeholder(config.getPlaceholder());
-        }
+//        if (config.getPlaceholder() != -1) {
+        glideRequest.placeholder(config.getPlaceholder());
+//        }
         //错误图
-        if (config.getErrorPic() != -1) {
-            glideRequest.error(config.getErrorPic());
-        }
+//        if (config.getErrorPic() != -1) {
+        glideRequest.error(config.getErrorPic());
+//        }
         //是否淡出淡入
         if (config.isCrossFade()) {
             glideRequest.transition(DrawableTransitionOptions.withCrossFade());

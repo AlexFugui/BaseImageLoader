@@ -28,4 +28,5 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(path: ':BaseImageLoader')
+//    implementation 'com.alex:BaseImageLoader:1.0.1'
 }

@@ -19,6 +19,14 @@ public class BaseImageSetting {
     private static BaseImageSetting baseImageSetting = new BaseImageSetting();
 
     /**
+     * 加载中图片
+     */
+    private int placeholder;
+    /**
+     * 加载错误图片
+     */
+    protected int errorPic;
+    /**
      * 默认内存缓存大小 20mb
      */
     private int memoryCacheSize = 20;
@@ -33,7 +41,7 @@ public class BaseImageSetting {
     /**
      * 默认的缓存文件夹名称
      */
-    private String cacheFileName = "GlideAlexCache";
+    private String cacheFileName = "BaseImageLoaderCache";
     /**
      * 通用缓存类型设置
      */
@@ -126,6 +134,24 @@ public class BaseImageSetting {
      */
     public BaseImageSetting setLogLevel(int logLevel) {
         this.logLevel = logLevel;
+        return this;
+    }
+
+    public int getPlaceholder() {
+        return placeholder;
+    }
+
+    public BaseImageSetting setPlaceholder(int placeholder) {
+        this.placeholder = placeholder;
+        return this;
+    }
+
+    public int getErrorPic() {
+        return errorPic;
+    }
+
+    public BaseImageSetting setErrorPic(int errorPic) {
+        this.errorPic = errorPic;
         return this;
     }
 }

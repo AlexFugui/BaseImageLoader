@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="BaseImageView">
-        <attr name="url" format="string" />
+        <attr name="url" format="string|reference" />
         <attr name="placeholder" format="reference" />
         <attr name="errorPic" format="reference" />
         <attr name="isCrossFade" format="boolean" />
+        <attr name="asBitmap" format="boolean" />
         <attr name="isCenterCrop" format="boolean" />
         <attr name="isCircle" format="boolean" />
         <attr name="topRightRadius" format="dimension" />

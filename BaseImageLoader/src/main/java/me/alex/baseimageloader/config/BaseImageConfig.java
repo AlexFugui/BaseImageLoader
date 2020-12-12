@@ -266,8 +266,8 @@ public class BaseImageConfig {
     public static class Builder {
         protected Object url;
         protected ImageView imageView = null;
-        protected int placeholder = -1;
-        protected int errorPic = -1;
+        protected int placeholder = BaseImageSetting.getInstance().getPlaceholder();
+        protected int errorPic = BaseImageSetting.getInstance().getErrorPic();
         protected boolean isCrossFade = false;
         protected boolean isCenterCrop = false;
         protected boolean isCircle = false;
@@ -359,8 +359,9 @@ public class BaseImageConfig {
             return asBitmap;
         }
 
-        public void setAsBitmap(boolean asBitmap) {
+        public Builder setAsBitmap(boolean asBitmap) {
             this.asBitmap = asBitmap;
+            return this;
         }
 
 
@@ -369,12 +370,14 @@ public class BaseImageConfig {
             return this;
         }
 
-        public boolean isClearMemory() {
-            return clearMemory;
+        public Builder clearMemory() {
+            this.clearMemory=true;
+            return this;
         }
 
-        public boolean isClearDiskCache() {
-            return clearDiskCache;
+        public Builder clearDiskCache() {
+            this.clearDiskCache = true;
+            return this;
         }
 
         public BaseImageConfig show() {

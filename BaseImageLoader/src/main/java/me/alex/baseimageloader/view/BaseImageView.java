@@ -84,6 +84,11 @@ public class BaseImageView extends ImageView {
     protected int radius;
 
     /**
+     * 是否以bitmap加载
+     */
+    protected boolean asBitmap;
+
+    /**
      * 缓存类型 默认为通用配置中的模式
      */
     private @CacheStrategy.Strategy
@@ -131,6 +136,9 @@ public class BaseImageView extends ImageView {
 
         //通用圆角
         radius = Tools.px2dp(context, typedArray.getDimensionPixelSize(R.styleable.BaseImageView_radius, 0));
+
+        //bitmap格式加载
+        asBitmap = typedArray.getBoolean(R.styleable.BaseImageView_asBitmap, false);
 
         //缓存策略
         cacheStrategy = typedArray.getInt(R.styleable.BaseImageView_cacheStrategy, BaseImageSetting.getInstance().getCacheStrategy());

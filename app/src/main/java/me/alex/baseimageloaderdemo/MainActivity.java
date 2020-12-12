@@ -21,6 +21,7 @@ import me.alex.baseimageloader.listener.OnBitmapResult;
 import me.alex.baseimageloader.listener.OnFileResult;
 import me.alex.baseimageloader.listener.OnGifResult;
 import me.alex.baseimageloader.listener.OnLoadListener;
+import me.alex.baseimageloader.srtategy.CacheStrategy;
 import me.alex.baseimageloader.view.BaseImageView;
 import me.alex.baseimageloaderdemo.databinding.ActivityMainBinding;
 
@@ -68,6 +69,22 @@ public class MainActivity extends AppCompatActivity {
         mImageLoader.loadImage(this, imageConfig);
          */
         mImageLoader = new BaseImageLoader();
+        mImageLoader.loadImage(this, ImageConfig.builder()
+                .url(Uri.parse(imageUrl))//url
+                .imageView(img1)//imageView
+                .placeholder(R.drawable.ic_baseline_adb_24)//占位图
+                .errorPic(R.mipmap.ic_launcher)//加载错误图片
+                .cacheStrategy(CacheStrategy.ALL)//缓存策略
+                .centerCrop(true)//centerCrop
+                .crossFade(true)//淡出淡入
+                .isCircle(true)//是否圆形显示
+                .setAsBitmap(true)//是否以bitmap加载图片,默认为drawable格式
+                .setRadius(30)//设置通用圆角,单位dp
+                .setTopRightRadius(10)//左上圆角,单位dp
+                .setTopLeftRadius(20)//右上圆角,单位dp
+                .setBottomRightRadius(30)//左下圆角,单位dp
+                .setBottomLeftRadius(40)//右下圆角,单位dp
+                .show());
 
         //使用自定义ImageConfig的建造者模式加载
 
@@ -208,5 +225,6 @@ public class MainActivity extends AppCompatActivity {
 
 //        mImageLoader.loadAll(this, R.layout.activity_main, "xxx.zip");
 
+//        mImageLoader.clear(this, BaseImageConfig.builder().clearMemory().clearDiskCache().show());
     }
 }
