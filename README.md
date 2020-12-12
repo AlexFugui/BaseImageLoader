@@ -20,7 +20,7 @@ github : [BaseImageLoader](https://github.com/AlexFugui/BaseImageLoader)
 与动态config完全相同功能的自定义ImageView,支持xml中自定义属性配置各种加载需求
 
 # 添加依赖
-``implementation 'com.alex:BaseImageLoader:1.0.1'``
+``implementation 'com.alex:BaseImageLoader:1.0.0'``
 
 # 使用说明
 ## 1.添加权限
