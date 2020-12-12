@@ -46,11 +46,11 @@ BaseImageSetting.getInstance()
 ```
 
 ## 3.使用
-**1.** 获取`BaseImageLoader`对象
+### 1.获取`BaseImageLoader`对象
 根据开发者项目设计模式,MVC/MVP/MVVM自行获取`BaseImageLoader`类对象,并自行管理生命周期.
 `BaseImageLoader`自行提供单例,`BaseImageLoader.getInstance();`
 
-**2.** 加载至ImageView(目前只支持加载至ImageVIew,待更新)
+### 2.加载至ImageView(目前只支持加载至ImageVIew,待更新)
 ```java
 BaseImageLoader mImageLoader = new BaseImageLoader();
 mImageLoader.loadImage(this, ImageConfig.builder()
@@ -80,7 +80,7 @@ isCircle(true)>setRadius()>setTopRightRadius()/setTopLeftRadius()/setBottomRight
 
 2.设置setRadius()会使分别控制单独圆角不生效,减少绘制次数
 
-**3.** 资源文件直出
+### 3.资源文件直出
 ```java
 /**
      * 加载图片同时获取不同格式的资源
@@ -155,7 +155,7 @@ isCircle(true)>setRadius()>setTopRightRadius()/setTopLeftRadius()/setBottomRight
             }
         });
 ```
-**4.** 自定义BaseImageView
+**4.**自定义BaseImageView
 xml中:
 ```xml
 <me.alex.baseimageloader.view.BaseImageView
