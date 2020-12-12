@@ -60,6 +60,7 @@ BaseImageSetting.getInstance()
 ## 3.使用
 ### 1.获取`BaseImageLoader`对象
 根据开发者项目设计模式,MVC/MVP/MVVM自行获取`BaseImageLoader`类对象,并自行管理生命周期.
+
 `BaseImageLoader`自行提供单例,`BaseImageLoader.getInstance();`
 
 ### 2.加载至ImageView(目前只支持加载至ImageVIew,待更新)
@@ -86,7 +87,7 @@ mImageLoader.loadImage(this, ImageConfig.builder()
 
 避免过度绘制和二次绘制,其中优先级
 
-isCircle(true)>setRadius()>setTopRightRadius()/setTopLeftRadius()/setBottomRightRadius/setBottomLeftRadius
+isCircle(true) > setRadius(int) > setTopRightRadius(int) = setTopLeftRadius(int) = setBottomRightRadius(int) = setBottomLeftRadius(int)
 
 1. 设置isCircle(true)会使通用圆角设置不生效,减少绘制次数
 
@@ -281,4 +282,3 @@ api与代码设置相同
 ## [附 Glide v4 中文文档](https://images.xiaozhuanlan.com/photo/2020/bccbaafa60c5275f590fcdf4ab6708cb.)
 
 ![ ](https://images.xiaozhuanlan.com/photo/2020/6ac26499784a44871d0f8d988b53a6cc.png)
-
