@@ -267,7 +267,7 @@ api与代码设置相同
 | clearDiskCache() | Boolean | true为清除储存中缓存,仅在BaseImageLoader.clear()中生效 |
 | show() |   无 | BaseImageConfig使用建造者模式,用于new BaseImageConfig对象 |
 
-# ![附 Glide v4 中文文档](https://muyangmin.github.io/glide-docs-cn/)
+# [附 Glide v4 中文文档](https://images.xiaozhuanlan.com/photo/2020/bccbaafa60c5275f590fcdf4ab6708cb.)
 
 ![ ](https://images.xiaozhuanlan.com/photo/2020/6ac26499784a44871d0f8d988b53a6cc.png)
 
