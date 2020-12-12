@@ -23,21 +23,28 @@ github : [BaseImageLoader](https://github.com/AlexFugui/BaseImageLoader)
 ``implementation 'com.alex:BaseImageLoader:1.0.3'``
 
 # 使用的依赖库
-api 'com.github.bumptech.glide:glide:4.11.0'
-annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+- 'com.github.bumptech.glide:glide:4.11.0'
+-  'com.github.bumptech.glide:compiler:4.11.0'
+
 开发者如需剔除重复依赖自行处理
 
 # 使用说明
 ## 1.添加权限
-需要添加访问网络和内存读写权限
+需要添问网络和内存读写权限
 
 ## 2.项目通用配置
 功能配置全部可选,如不配置则:
+
 默认内存缓存大小20mb
+
 默认bitmap池缓存30mb
+
 默认硬盘缓存250mb
+
 默认缓存文件夹名称`BaseImageLoaderCache`
+
 默认缓存策略为`AUTOMATIC`,自动模式
+
 ```java
 BaseImageSetting.getInstance()
                 .setMemoryCacheSize(30)//设置内存缓存大小 单位mb
@@ -81,11 +88,12 @@ mImageLoader.loadImage(this, ImageConfig.builder()
 
 isCircle(true)>setRadius()>setTopRightRadius()/setTopLeftRadius()/setBottomRightRadius/setBottomLeftRadius
 
-1.设置isCircle(true)会使通用圆角设置不生效,减少绘制次数
+1. 设置isCircle(true)会使通用圆角设置不生效,减少绘制次数
 
-2.设置setRadius()会使分别控制单独圆角不生效,减少绘制次数
+2. 设置setRadius()会使分别控制单独圆角不生效,减少绘制次数
 
 ### 3.资源文件直出
+方法一:
 ```java
 /**
      * 加载图片同时获取不同格式的资源
@@ -109,6 +117,7 @@ isCircle(true)>setRadius()>setTopRightRadius()/setTopLeftRadius()/setBottomRight
         });
 ```
 
+方法二:
 ```java
 /**
      *
@@ -160,8 +169,10 @@ isCircle(true)>setRadius()>setTopRightRadius()/setTopLeftRadius()/setBottomRight
             }
         });
 ```
-**4.**自定义BaseImageView
+### 4.自定义BaseImageView
+
 xml中:
+
 ```xml
 <me.alex.baseimageloader.view.BaseImageView
     android:layout_width="100dp"
@@ -267,7 +278,7 @@ api与代码设置相同
 | clearDiskCache() | Boolean | true为清除储存中缓存,仅在BaseImageLoader.clear()中生效 |
 | show() |   无 | BaseImageConfig使用建造者模式,用于new BaseImageConfig对象 |
 
-# [附 Glide v4 中文文档](https://images.xiaozhuanlan.com/photo/2020/bccbaafa60c5275f590fcdf4ab6708cb.)
+## [附 Glide v4 中文文档](https://images.xiaozhuanlan.com/photo/2020/bccbaafa60c5275f590fcdf4ab6708cb.)
 
 ![ ](https://images.xiaozhuanlan.com/photo/2020/6ac26499784a44871d0f8d988b53a6cc.png)
 
