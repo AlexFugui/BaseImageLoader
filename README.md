@@ -1,9 +1,10 @@
-#说明
+# 说明
 ![话不多说先放图](https://images.xiaozhuanlan.com/photo/2020/c36eb5e1aa850f01e02d2aef9a619618.jpg)
 支持加载网络图片(String格式url)/本地资源(miamap和drawable)/网络.9图片/gif加载/自定义样式(圆形/圆角/centerCrop)/dataBinding
 更多使用方法和示例代码请下载demo源码查看
+github : [BaseImageLoader](https://github.com/AlexFugui/BaseImageLoader)
 
-#设计说明
+# 设计说明
 根据`BaseImageLoader`持有图片View层的`context`和`BaseImageConfig`类实现Glide原生的生命周期感知和多样化的自定义配置加载
 `BaseImageConfig`使用建造者模式,使用更灵活更方便,也可自行继承`BaseImageConfig`减少类名长度和实现自定义功能
 ##主要功能
@@ -16,14 +17,14 @@
 - BaseImageView
 与动态config完全相同功能的自定义ImageView,支持xml中自定义属性配置各种加载需求
 
-#添加依赖
+# 添加依赖
 ``implementation 'com.alex:BaseImageLoader:1.0.1'``
 
-#使用说明
-##1.添加权限
+# 使用说明
+## 1.添加权限
 需要添加访问网络和内存读写权限
 
-##2.项目通用配置
+## 2.项目通用配置
 功能配置全部可选,如不配置则:
 默认内存缓存大小20mb
 默认bitmap池缓存30mb
@@ -42,7 +43,7 @@ BaseImageSetting.getInstance()
                 .setCacheStrategy(CacheStrategy.AUTOMATIC);//设置缓存策略
 ```
 
-##3.使用
+## 3.使用
 **1.**获取`BaseImageLoader`对象
 根据开发者项目设计模式,MVC/MVP/MVVM自行获取`BaseImageLoader`类对象,并自行管理生命周期.
 `BaseImageLoader`自行提供单例,`BaseImageLoader.getInstance();`
@@ -180,7 +181,7 @@ api与代码设置相同
 详见demo中dataBinding简单使用
 优先级规则同上
 
-**5.**参数说明
+# 参数说明
 **1.BaseImageSetting:**
 | 函数名 | 入参类型 |参数说明|
 | -------- | -------- | -------- |
