@@ -1,6 +1,7 @@
 package me.alex.baseimageloaderdemo;
 
 import me.alex.baseimageloader.config.BaseImageConfig;
+import me.alex.baseimageloader.config.Builder;
 
 /**
  * ================================================
@@ -23,13 +24,4 @@ public class ImageConfig extends BaseImageConfig {
     public void setVisibility(boolean visibility) {
         isVisibility = visibility;
     }
-
-    public ImageConfig() {
-
-    }
-
-    public ImageConfig(Builder builder) {
-        super(builder);
-    }
-
 }

@@ -2,23 +2,20 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
 def siteUrl = 'https://github.com/AlexFugui/BaseImageLoader' //项目在github主页地址
-def gitUrl = 'https://github.com/AlexFugui/BaseImageLoader.git'   //Git仓库的地址
+def gitUrl = 'https://github.com/AlexFugui/BaseImageLoader.git' //Git仓库的地址
 group = "com.alex"
-version = "1.0.3"
+version = "1.0.4"
 
 
 install {
     repositories.mavenInstaller {
-        // 生成pom.xml和参数
         pom {
             project {
                 packaging 'aar'//打包类型 aar文件
-                // 项目描述，复制我的话，这里需要修改。
                 name 'BaseImageLoader'// 在pom库中的包名
                 description 'Android BaseImageLoader'// 可选，项目描述。
-                url siteUrl // 项目主页，这里是引用上面定义好。
+                url siteUrl // 项目主页
 
-                // 软件开源协议，现在一般都是Apache License2.0吧，复制我的，这里不需要修改。
                 licenses {
                     license {
                         name 'The Apache Software License, Version 2.0'
@@ -26,7 +23,6 @@ install {
                     }
                 }
 
-                //填写开发者基本信息，复制我的，这里需要修改。
                 developers {
                     developer {
                         id 'AlexFugui' // 开发者的id。
@@ -35,7 +31,6 @@ install {
                     }
                 }
 
-                // SCM，复制我的，这里不需要修改。
                 scm {
                     connection gitUrl // Git仓库地址。
                     developerConnection gitUrl // Git仓库地址。
@@ -46,21 +41,18 @@ install {
     }
 }
 
-// 生成jar包的task，不需要修改。
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
     getArchiveClassifier().convention("sources")
     getArchiveClassifier().set("sources")
 }
 
-// 生成jarDoc的task，不需要修改。
 task javadoc(type: Javadoc) {
     source = android.sourceSets.main.java.srcDirs
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    failOnError false // 忽略注释语法错误，如果用jdk1.8你的注释写的不规范就编译不过。
+    failOnError false
 }
 
-// 生成javaDoc的jar，不需要修改。
 task javadocJar(type: Jar, dependsOn: javadoc) {
     getArchiveClassifier().convention("javadoc")
     getArchiveClassifier().set("javadoc")
@@ -74,15 +66,14 @@ artifacts {
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 bintray {
-    user = properties.getProperty("bintray.user") // Bintray的用户名。
-    key = properties.getProperty("bintray.apikey") // Bintray刚才保存的ApiKey。
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
 
     configurations = ['archives']
     pkg {
         repo = "maven"
-        //Repository的名字.需要自己在bintray网站上先添加一个Organizations,然后再创建Repository,我这里取名叫maven,也是对应了Maven类型
         name = "BaseImageLoader"//项目上传以后在名为maven的库中的包名
-        userOrg = 'alexfugui'//Bintray的组织中,你的id
+        userOrg = 'alexfugui'//Bintray的组织中 id
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]

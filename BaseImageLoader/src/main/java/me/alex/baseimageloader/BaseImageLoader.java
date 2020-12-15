@@ -5,6 +5,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -16,9 +19,17 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.load.resource.gif.GifDrawable;
+import com.bumptech.glide.request.Request;
 import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.target.CustomViewTarget;
+import com.bumptech.glide.request.target.DrawableImageViewTarget;
 import com.bumptech.glide.request.target.ImageViewTarget;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.SizeReadyCallback;
 import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.target.ViewTarget;
+import com.bumptech.glide.request.transition.Transition;
 
 import java.io.File;
 
@@ -37,6 +48,7 @@ import me.alex.baseimageloader.srtategy.BaseImageLoaderStrategy;
 import me.alex.baseimageloader.srtategy.CacheStrategy;
 import me.alex.baseimageloader.tools.Tools;
 import me.alex.baseimageloader.transform.RoundAndCenterCropTransform;
+import me.alex.baseimageloader.view.BaseImageView;
 
 
 /**
@@ -63,7 +75,7 @@ public class BaseImageLoader implements BaseImageLoaderStrategy<BaseImageConfig,
 
     @SuppressLint("CheckResult")
     @Override
-    public void loadImage(@NonNull Context context, @NonNull BaseImageConfig config) {
+    public void loadImage(@NonNull Context context, @NonNull final BaseImageConfig config) {
         GlideRequests requests;
         requests = GlideAlex.with(context);//如果context是activity/Fragment则自动使用V层的生命周期
         if (config.getAsBitmap()) {
@@ -168,8 +180,39 @@ public class BaseImageLoader implements BaseImageLoaderStrategy<BaseImageConfig,
                 }
             });
         }
+        if (config.getImageView() instanceof ImageView) {
+            glideRequest.into((ImageView) config.getImageView());
+        } else if (config.getImageView() instanceof ViewGroup) {
+            glideRequest.into(new CustomViewTarget<ViewGroup, Drawable>((ViewGroup) config.getImageView()) {
+                @Override
+                public void onLoadFailed(@Nullable Drawable errorDrawable) {
+                    config.getImageView().setBackground(errorDrawable);
+                }
 
-        glideRequest.into(config.getImageView());
+                @Override
+                public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                    config.getImageView().setBackground(resource);
+                }
+
+                @Override
+                protected void onResourceCleared(@Nullable Drawable placeholder) {
+                    config.getImageView().setBackground(placeholder);
+                }
+            });
+        } else {
+            glideRequest.into(new CustomTarget<Drawable>() {
+                @Override
+                public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                    config.getImageView().setBackground(resource);
+                }
+
+                @Override
+                public void onLoadCleared(@Nullable Drawable placeholder) {
+                    config.getImageView().setBackground(placeholder);
+                }
+            });
+        }
+
     }
 
     @Override

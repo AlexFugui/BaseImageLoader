@@ -5,11 +5,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.target.Target;
@@ -213,15 +215,21 @@ public class MainActivity extends AppCompatActivity {
         data.setContent("自定义View dataBinding使用");
         binding.setData(data);
 
+        /**
+         * 给ViewGroup类加载资源
+         */
+        ScrollView scrollView = findViewById(R.id.scrollView);
+        mImageLoader.loadImage(this, ImageConfig.builder()
+                .url("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1608029945702&di=df38e9e27294155dbc461c9f3b20a6de&imgtype=0&src=http%3A%2F%2Fa2.att.hudong.com%2F27%2F81%2F01200000194677136358818023076.jpg")
+                .placeholder(R.mipmap.ic_launcher)
+                .isCircle(true)
+                .imageView(scrollView)
+                .show());
 
         /**
-         * 需求:
-         * 1.网络.9图片 √
-         * 2.加载失败重新加载 自定义次数
-         * 3.加载前获取bitmap和宽高 √ (使用4自行获取宽高)
-         * 4.加载完成后直出file √
-         * 5.加载结果回调 √
+         * 给继承于View的控件加载资源
          */
+        mImageLoader.loadImage(this, ImageConfig.builder().url(imageUrl).imageView(binding.img16).show());
 
 //        mImageLoader.loadAll(this, R.layout.activity_main, "xxx.zip");
 

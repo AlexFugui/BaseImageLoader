@@ -28,6 +28,7 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     api 'androidx.appcompat:appcompat:1.2.0'
-//    implementation project(path: ':BaseImageLoader')
-    implementation 'com.alex:BaseImageLoader:1.0.2'
+//    implementation 'com.kongzue.baseframeworkx:baseframework:6.7.7'
+    implementation project(path: ':BaseImageLoader')
+//    implementation 'com.alex:BaseImageLoader:1.0.2'
 }
