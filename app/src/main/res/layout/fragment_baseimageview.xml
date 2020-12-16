@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <me.alex.baseimageloader.view.BaseImageView
+            android:id="@+id/img15"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:isCircle="true"
+            app:topLeftRadius="10dp"
+            app:topRightRadius="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="自定义VIew" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <me.alex.baseimageloader.view.BaseImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:asBitmap="true"
+            app:bottomLeftRadius="40dp"
+            app:bottomRightRadius="30dp"
+            app:cacheStrategy="ALL"
+            app:errorPic="@mipmap/ic_launcher"
+            app:isCenterCrop="true"
+            app:isCircle="true"
+            app:isCrossFade="true"
+            app:placeholder="@drawable/ic_baseline_adb_24"
+            app:radius="30dp"
+            app:topLeftRadius="20dp"
+            app:topRightRadius="10dp"
+            app:url="https://xxx.xxx.com/photo/xxxxxx.png" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="文档demo" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <me.alex.baseimageloader.view.BaseImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:url="@{data.imageUrl}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="dataBinding示例看代码" />
+    </LinearLayout>
+
+
+</LinearLayout>

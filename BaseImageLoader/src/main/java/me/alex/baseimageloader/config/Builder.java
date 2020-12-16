@@ -66,13 +66,13 @@ public class Builder {
         return this;
     }
 
-    public Builder centerCrop(boolean centerCrop) {
-        isCenterCrop = centerCrop;
+    public Builder centerCrop() {
+        isCenterCrop = true;
         return this;
     }
 
-    public Builder isCircle(boolean circle) {
-        isCircle = circle;
+    public Builder isCircle() {
+        isCircle = true;
         return this;
     }
 

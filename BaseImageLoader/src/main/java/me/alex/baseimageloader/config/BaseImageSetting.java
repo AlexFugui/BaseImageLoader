@@ -53,6 +53,11 @@ public class BaseImageSetting {
      */
     private int logLevel = Log.ERROR;
 
+    /**
+     * 自动加载图片缓存数量最大值
+     */
+    private int cacheSize = 50;
+
 
     public static BaseImageSetting getInstance() {
         return baseImageSetting;
@@ -112,8 +117,9 @@ public class BaseImageSetting {
         return this;
     }
 
-    public void setCacheStrategy(@CacheStrategy.Strategy int cacheStrategy) {
+    public BaseImageSetting setCacheStrategy(@CacheStrategy.Strategy int cacheStrategy) {
         this.cacheStrategy = cacheStrategy;
+        return this;
     }
 
     public @CacheStrategy.Strategy
@@ -152,6 +158,15 @@ public class BaseImageSetting {
 
     public BaseImageSetting setErrorPic(int errorPic) {
         this.errorPic = errorPic;
+        return this;
+    }
+
+    public int getCacheSize() {
+        return cacheSize;
+    }
+
+    public BaseImageSetting setCacheSize(int cacheSize) {
+        this.cacheSize = cacheSize;
         return this;
     }
 }

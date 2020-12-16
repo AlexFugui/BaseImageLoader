@@ -32,7 +32,10 @@ public class BaseImageView extends ImageView {
     private Context context;
     private BaseImageLoader loader;
     private BaseImageConfig config = new BaseImageConfig();
-
+    /**
+     * 图片资源指向
+     */
+    protected Object url;
     /**
      * 加载网络图片之前占位图片
      */
@@ -111,6 +114,8 @@ public class BaseImageView extends ImageView {
         this.context = context;
         loader = new BaseImageLoader();
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.BaseImageView, 0, 0);
+        //资源指向
+        url = typedArray.getString(R.styleable.BaseImageView_url);
         //占位图
         placeholder = typedArray.getResourceId(R.styleable.BaseImageView_placeholder, 0);
         //错误图
@@ -143,17 +148,15 @@ public class BaseImageView extends ImageView {
         //缓存策略
         cacheStrategy = typedArray.getInt(R.styleable.BaseImageView_cacheStrategy, BaseImageSetting.getInstance().getCacheStrategy());
 
-        //url
-        String url = typedArray.getString(R.styleable.BaseImageView_url);
+        initConfig();
         if (url != null && !url.equals("")) {
-            load(url);
+            loader.loadImage(context, config);
         }
 
         typedArray.recycle();
     }
 
-    @SuppressLint("CheckResult")
-    public void load(Object url) {
+    private void initConfig() {
         config.setUrl(url);
         config.setImageView(BaseImageView.this);
 //        getLifecycle().addObserver(new BaseLifeObserver(context));
@@ -175,15 +178,24 @@ public class BaseImageView extends ImageView {
         config.setCrossFade(isCrossFade);
 
         //centerCrop
-        config.setCenterCrop(isCenterCrop);
+        if (isCenterCrop) {
+            config.setCenterCrop();
+        }
         //是否将图片剪切为圆形
-        config.setCircle(isCircle);
+        if (isCircle) {
+            config.setCircle();
+        }
         config.setTopRightRadius(topRightRadius);
         config.setTopLeftRadius(topLeftRadius);
         config.setBottomRightRadius(bottomRightRadius);
         config.setBottomLeftRadius(bottomLeftRadius);
         config.setRadius(radius);
+    }
 
+    @SuppressLint("CheckResult")
+    public void load(Object url) {
+        this.url = url;
+        config.setUrl(url);
         loader.loadImage(context, config);
     }
 
@@ -273,6 +285,10 @@ public class BaseImageView extends ImageView {
 
     public void setCacheStrategy(int cacheStrategy) {
         this.cacheStrategy = cacheStrategy;
+    }
+
+    public BaseImageConfig getConfig() {
+        return config;
     }
 
     public void setUrl(String url) {

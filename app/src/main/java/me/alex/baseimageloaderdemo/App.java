@@ -3,6 +3,8 @@ package me.alex.baseimageloaderdemo;
 import android.app.Application;
 import android.util.Log;
 
+import com.kongzue.baseframework.BaseApp;
+
 import me.alex.baseimageloader.config.BaseImageSetting;
 import me.alex.baseimageloader.srtategy.CacheStrategy;
 
@@ -21,10 +23,9 @@ import me.alex.baseimageloader.srtategy.CacheStrategy;
  * <p>
  * ================================================
  */
-public class App extends Application {
+public class App extends BaseApp<App> {
     @Override
-    public void onCreate() {
-        super.onCreate();
+    public void init() {
         BaseImageSetting.getInstance()
                 .setMemoryCacheSize(30)//设置内存缓存大小 单位mb
                 .setBitmapPoolSize(50)//设置bitmap池缓存大小 单位mb
@@ -33,6 +34,9 @@ public class App extends Application {
                 .setPlaceholder(R.drawable.ic_baseline_adb_24)//设置通用占位图片,全项目生效
                 .setErrorPic(R.mipmap.ic_launcher)//设置通用加载错误图片,全项目生效
                 .setCacheFileName("BaseImageLoaderDemo")//设置储存缓存文件夹名称,api基于Glide v4
-                .setCacheStrategy(CacheStrategy.AUTOMATIC);//设置缓存策略
+                .setCacheStrategy(CacheStrategy.AUTOMATIC)//设置缓存策略
+                .setCacheSize(50)//设置自动加载图片缓存数量,默认50
+        ;
+
     }
 }

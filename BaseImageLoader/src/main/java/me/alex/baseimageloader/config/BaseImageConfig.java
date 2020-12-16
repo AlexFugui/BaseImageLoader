@@ -200,12 +200,12 @@ public class BaseImageConfig {
         isCrossFade = crossFade;
     }
 
-    public void setCenterCrop(boolean centerCrop) {
-        isCenterCrop = centerCrop;
+    public void setCenterCrop() {
+        isCenterCrop = true;
     }
 
-    public void setCircle(boolean circle) {
-        isCircle = circle;
+    public void setCircle() {
+        isCircle = true;
     }
 
     public void setTopRightRadius(float topRightRadius) {

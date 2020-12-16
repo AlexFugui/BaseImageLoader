@@ -16,8 +16,10 @@
 package me.alex.baseimageloader.srtategy;
 
 import android.content.Context;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -48,20 +50,22 @@ public interface BaseImageLoaderStrategy<T extends BaseImageConfig, L extends On
      */
     void loadImage(@NonNull Context context, @NonNull T config);
 
+    void autoLoadImage(@NonNull Context context, @NonNull ViewGroup viewGroup, @NonNull String zipFileRealPath);
+
     /**
      * 加载图片同时获取不同格式的资源
-     * @param context {@link Context}
-     * @param url 资源url或资源文件
+     *
+     * @param context  {@link Context}
+     * @param url      资源url或资源文件
      * @param listener 获取的资源回调结果
      */
     void loadImageAs(@NonNull Context context, @NonNull Object url, @NonNull L listener);
 
     /**
-     *
-     * @param context {@link Context}
-     * @param url 资源url或资源文件
+     * @param context   {@link Context}
+     * @param url       资源url或资源文件
      * @param imageView 显示的imageView
-     * @param listener 获取的资源回调结果
+     * @param listener  获取的资源回调结果
      */
     void loadImageAs(@NonNull Context context, @NonNull Object url, @Nullable ImageView imageView, @NonNull L listener);
 

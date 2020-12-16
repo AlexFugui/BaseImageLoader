@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/autoLoadViewGroup"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:overScrollMode="never">
+
+        <me.alex.baseimageloader.view.BaseImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:tag="img1.png" />
+
+        <me.alex.baseimageloader.view.BaseImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:tag="img2.png"
+            app:isCircle="true" />
+
+        <me.alex.baseimageloader.view.BaseImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:tag="img3.png" />
+
+        <me.alex.baseimageloader.view.BaseImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:tag="img4.png" />
+
+        <me.alex.baseimageloader.view.BaseImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:tag="img5.png" />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:tag="img3.png" />
+
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:tag="img1.png" />
+    </LinearLayout>
+
+</ScrollView>

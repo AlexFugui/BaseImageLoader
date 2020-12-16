@@ -3,9 +3,9 @@ package me.alex.baseimageloader;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -19,16 +19,11 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.load.resource.gif.GifDrawable;
-import com.bumptech.glide.request.Request;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.target.CustomViewTarget;
-import com.bumptech.glide.request.target.DrawableImageViewTarget;
 import com.bumptech.glide.request.target.ImageViewTarget;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.target.SizeReadyCallback;
 import com.bumptech.glide.request.target.Target;
-import com.bumptech.glide.request.target.ViewTarget;
 import com.bumptech.glide.request.transition.Transition;
 
 import java.io.File;
@@ -46,6 +41,7 @@ import me.alex.baseimageloader.module.GlideRequest;
 import me.alex.baseimageloader.module.GlideRequests;
 import me.alex.baseimageloader.srtategy.BaseImageLoaderStrategy;
 import me.alex.baseimageloader.srtategy.CacheStrategy;
+import me.alex.baseimageloader.tools.AutoLoadTools;
 import me.alex.baseimageloader.tools.Tools;
 import me.alex.baseimageloader.transform.RoundAndCenterCropTransform;
 import me.alex.baseimageloader.view.BaseImageView;
@@ -63,7 +59,7 @@ import me.alex.baseimageloader.view.BaseImageView;
  */
 public class BaseImageLoader implements BaseImageLoaderStrategy<BaseImageConfig, OnAsListener> {
 
-    public static BaseImageLoader instance = new BaseImageLoader();
+    private static BaseImageLoader instance = new BaseImageLoader();
 
     public static BaseImageLoader getInstance() {
         return instance;
@@ -214,6 +210,47 @@ public class BaseImageLoader implements BaseImageLoaderStrategy<BaseImageConfig,
         }
 
     }
+
+    @Override
+    public void autoLoadImage(@NonNull Context context, @NonNull ViewGroup viewGroup, @NonNull String zipFileRealPath) {
+        try {
+            handlerViewGroup(context, viewGroup, zipFileRealPath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void handlerViewGroup(Context context, ViewGroup viewGroup, String zipFileRealPath) throws Exception {
+        for (int i = 0; i < viewGroup.getChildCount(); i++) {
+            if (viewGroup.getChildAt(i) instanceof ViewGroup) {
+                if (viewGroup.getChildAt(i).getTag() != null && !viewGroup.getChildAt(i).getTag().equals("")) {
+                    loadImage(context, BaseImageConfig.builder()
+                            .url(AutoLoadTools.getInstance().readZipFile(zipFileRealPath, (String) viewGroup.getChildAt(i).getTag()))
+                            .imageView(viewGroup.getChildAt(i))
+                            .show());
+                }
+                if (viewGroup.getChildCount() > 0) {
+                    handlerViewGroup(context, (ViewGroup) viewGroup.getChildAt(i), zipFileRealPath);
+                }
+            } else {
+                View view = viewGroup.getChildAt(i);
+                if (view.getTag() != null && !view.getTag().equals("")) {
+                    if (view instanceof BaseImageView) {
+                        BaseImageConfig config = ((BaseImageView) view).getConfig();
+                        config.setUrl(AutoLoadTools.getInstance().readZipFile(zipFileRealPath, (String) viewGroup.getChildAt(i).getTag()));
+                        loadImage(context, config);
+                    } else {
+                        loadImage(context, BaseImageConfig.builder()
+                                .url(AutoLoadTools.getInstance().readZipFile(zipFileRealPath, (String) viewGroup.getChildAt(i).getTag()))
+                                .imageView(view)
+                                .show());
+                    }
+                }
+            }
+        }
+
+    }
+
 
     @Override
     public void loadImageAs(@NonNull Context context, @NonNull Object url, @NonNull OnAsListener listener) {
