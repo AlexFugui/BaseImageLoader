@@ -2,12 +2,16 @@
 ![话不多说先放图](https://images.xiaozhuanlan.com/photo/2020/5bfda51d6beaa59c92358760212931b2.png)
 # 说明
 支持加载网络图片(String格式url)/本地资源(mipmap和drawable)/网络.9图片/gif加载/自定义样式(圆形/圆角/centerCrop)/dataBinding
+
 v1.1.0起支持读取zip中图片加载至任意View中,无需解压.
+
 更多使用方法和示例代码请下载demo源码查看
+
 github : [BaseImageLoader](https://github.com/AlexFugui/BaseImageLoader)
 
 # 设计说明
 根据`BaseImageLoader`持有图片View层的`context`和`BaseImageConfig`类实现Glide原生的生命周期感知和多样化的自定义配置加载
+
 `BaseImageConfig`使用建造者模式,使用更灵活更方便,也可自行继承`BaseImageConfig`减少类名长度和实现自定义功能
 
 # 主要功能
@@ -212,8 +216,11 @@ api与代码设置相同
 ### 4.自动加载图片
 ```java
 String ZIP_FILE_PATH = me.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath() + File.separator + "imgs.zip";
+
 //ZIP_FILE_PATH真实路径为:/storage/emulated/0/Android/data/me.alex.baseimageloaderdemo/files/Documents/imgs.zip
+
 ScrollView autoLoadViewGroup = findViewById(R.id.autoLoadViewGroup);
+
 BaseImageLoader.getInstance().autoLoadImage(this, autoLoadViewGroup, ZIP_FILE_PATH);
 ```
 xml中
@@ -232,8 +239,7 @@ xml中
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:overScrollMode="never">
+        android:orientation="vertical">
 
         <me.alex.baseimageloader.view.BaseImageView
             android:layout_width="100dp"
