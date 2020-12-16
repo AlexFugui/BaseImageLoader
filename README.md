@@ -1,26 +1,29 @@
+# Demo效果图
+![话不多说先放图](https://images.xiaozhuanlan.com/photo/2020/5bfda51d6beaa59c92358760212931b2.png)
 # 说明
-![话不多说先放图](https://images.xiaozhuanlan.com/photo/2020/c36eb5e1aa850f01e02d2aef9a619618.jpg)
 支持加载网络图片(String格式url)/本地资源(mipmap和drawable)/网络.9图片/gif加载/自定义样式(圆形/圆角/centerCrop)/dataBinding
-
+v1.1.0起支持读取zip中图片加载至任意View中,无需解压.
 更多使用方法和示例代码请下载demo源码查看
-
 github : [BaseImageLoader](https://github.com/AlexFugui/BaseImageLoader)
 
 # 设计说明
 根据`BaseImageLoader`持有图片View层的`context`和`BaseImageConfig`类实现Glide原生的生命周期感知和多样化的自定义配置加载
 `BaseImageConfig`使用建造者模式,使用更灵活更方便,也可自行继承`BaseImageConfig`减少类名长度和实现自定义功能
+
 # 主要功能
 - loadImage
 动态配置config加载你需求的资源图片
 - loadImageAs
-获取网络url返回的资源,可获取`drawable`/`bitmap`/`file`/`gif`四种文件格式,可控知否获取资源的同时加载到imageView上
+获取网络url返回的资源,可获取`drawable`/`bitmap`/`file`/`gif`四种文件格式,可控知否获取资源的同时加载到View上
 - clear
 取消加载或清除内存/储存中的缓存
 - BaseImageView
 与动态config完全相同功能的自定义ImageView,支持xml中自定义属性配置各种加载需求
+- autoLoadImage
+开发者自行指定zip压缩包的路径.并绑定当前View的根布局,配合View的tag字段自动加载zip中符合tag中图片名称的图片
 
 # 添加依赖
-``implementation 'com.alex:BaseImageLoader:1.0.4'``
+``implementation 'com.alex:BaseImageLoader:1.1.0'``
 
 # 使用的依赖库
 - api 'com.github.bumptech.glide:glide:4.11.0'
@@ -47,14 +50,16 @@ github : [BaseImageLoader](https://github.com/AlexFugui/BaseImageLoader)
 
 ```java
     BaseImageSetting.getInstance()
-                    .setMemoryCacheSize(30)//设置内存缓存大小 单位mb
-                    .setBitmapPoolSize(50)//设置bitmap池缓存大小 单位mb
-                    .setDiskCacheSize(80)//设置储存储存缓存大小 单位mb
-                    .setLogLevel(Log.ERROR)//设置log等级
-                    .setPlaceholder(R.drawable.ic_baseline_adb_24)//设置通用占位图片,全项目生效
-                    .setErrorPic(R.mipmap.ic_launcher)//设置通用加载错误图片,全项目生效
-                    .setCacheFileName("BaseImageLoaderDemo")//设置储存缓存文件夹名称,api基于Glide v4
-                    .setCacheStrategy(CacheStrategy.AUTOMATIC);//设置缓存策略
+                .setMemoryCacheSize(30)//设置内存缓存大小 单位mb
+                .setBitmapPoolSize(50)//设置bitmap池缓存大小 单位mb
+                .setDiskCacheSize(80)//设置储存储存缓存大小 单位mb
+                .setLogLevel(Log.ERROR)//设置log等级
+                .setPlaceholder(R.drawable.ic_baseline_adb_24)//设置通用占位图片,全项目生效
+                .setErrorPic(R.mipmap.ic_launcher)//设置通用加载错误图片,全项目生效
+                .setCacheFileName("BaseImageLoaderDemo")//设置储存缓存文件夹名称,api基于Glide v4
+                .setCacheStrategy(CacheStrategy.AUTOMATIC)//设置缓存策略
+                .setCacheSize(50)//设置自动加载图片缓存数量,默认50
+        ;
 ```
 
 ## 3.使用
@@ -204,6 +209,65 @@ api与代码设置相同
 详见demo中dataBinding简单使用
 优先级规则同上
 
+### 4.自动加载图片
+```java
+String ZIP_FILE_PATH = me.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath() + File.separator + "imgs.zip";
+//ZIP_FILE_PATH真实路径为:/storage/emulated/0/Android/data/me.alex.baseimageloaderdemo/files/Documents/imgs.zip
+ScrollView autoLoadViewGroup = findViewById(R.id.autoLoadViewGroup);
+BaseImageLoader.getInstance().autoLoadImage(this, autoLoadViewGroup, ZIP_FILE_PATH);
+```
+xml中
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/autoLoadViewGroup"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:overScrollMode="never">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:overScrollMode="never">
+
+        <me.alex.baseimageloader.view.BaseImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:tag="img1.png" />
+
+        <me.alex.baseimageloader.view.BaseImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:tag="img2.png"
+            app:isCircle="true" />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:tag="img3.png" />
+
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:tag="img1.png" />
+    </LinearLayout>
+</ScrollView>
+```
+- zip文件夹位置开发者自行设置,demo中是将assets中的imgs.zip复制至指定路径然后加载.
+- 配合xml中View对象的tag参数匹配zip中的文件名称.
+- 如使用BaseImageView+tag加载图片,支持自定义属性
+- Demo中加载6张图片耗时60ms左右
+- 本功能开发本意是减少apk体积 , 减少重复资源下载 , 开发者可在业务流程中自行处理zip文件的下载和存放位置 , 自行处理数据安全
+
 # 参数说明
 **1.BaseImageSetting:**
 | 函数名 | 入参类型 |参数说明|
@@ -226,6 +290,15 @@ api与代码设置相同
      * @param config  {@link BaseImageConfig}  图片加载配置信息
      */
     void loadImage(@NonNull Context context, @NonNull T config);
+```
+```java
+/**
+     * 自动加载图片
+     * @param context {@link Context}
+     * @param viewGroup xml中的根标签View
+     * @param zipFileRealPath zip文件夹路径
+     */
+    void autoLoadImage(@NonNull Context context, @NonNull ViewGroup viewGroup, @NonNull String zipFileRealPath);
 ```
 ```java
 /**
@@ -282,6 +355,7 @@ api与代码设置相同
 **1.支持的urlModel类型 :**
 `Bitmap`/`Drawable`/`String`/`Uri`/`File`/`Integer resourceId`/`URL`/`byte[]`/`Object`
 **2.ImageView的子类使用Glide默认的 setImageDrawable() 方式实现; 其他继承VIew或ViewGroup的以setBackground() 方式实现**
+
 
 ### [附  Glide v4 中文文档](https://muyangmin.github.io/glide-docs-cn/)
 

@@ -50,6 +50,12 @@ public interface BaseImageLoaderStrategy<T extends BaseImageConfig, L extends On
      */
     void loadImage(@NonNull Context context, @NonNull T config);
 
+    /**
+     * 自动加载图片
+     * @param context {@link Context}
+     * @param viewGroup xml中的根标签View
+     * @param zipFileRealPath zip文件夹路径
+     */
     void autoLoadImage(@NonNull Context context, @NonNull ViewGroup viewGroup, @NonNull String zipFileRealPath);
 
     /**
