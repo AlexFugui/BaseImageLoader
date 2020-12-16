@@ -41,38 +41,4 @@ public class Tools {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }
-
-
-    /**
-     * 无需解压直接读取Zip文件和文件内容
-     *
-     * @param file
-     * @throws Exception
-     */
-    public static void readZipFile(String file) throws Exception {
-        ZipFile zf = new ZipFile(file);
-        InputStream in = new BufferedInputStream(new FileInputStream(file));
-        ZipInputStream zin = new ZipInputStream(in);
-        ZipEntry ze;
-        while ((ze = zin.getNextEntry()) != null) {
-            if (ze.isDirectory()) {
-                //Do nothing
-            } else {
-                Log.e("qqqqq", "file - " + ze.getName() + " : " + ze.getSize() + " bytes");
-                if (ze.getName().equals("sbl1.mbn")) {
-                    BufferedReader br = new BufferedReader(new InputStreamReader(zf.getInputStream(ze)));
-                    String line;
-                    while ((line = br.readLine()) != null) {
-                        Log.e("qqqqq", line);
-                        if (line.contains("OK")) {
-                            Log.e("qqqqq", "OK");
-                        }
-                    }
-                    br.close();
-                }
-            }
-        }
-        zin.closeEntry();
-    }
-
 }
