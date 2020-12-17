@@ -92,7 +92,7 @@ github : [BaseImageLoader](https://github.com/AlexFugui/BaseImageLoader)
                     .setBottomLeftRadius(40)//右下圆角,单位dp
                     .show());
 ```
-###**注意:**
+### **注意:**
 
 避免过度绘制和二次绘制,其中优先级
 
